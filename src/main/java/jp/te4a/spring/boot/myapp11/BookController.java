@@ -27,7 +27,7 @@ public class BookController {
 		return "books/list";
 	}
 	@PostMapping(path="create")
-	String create(@Validated BookForm form, BindingResult result , Model model) {
+	String create(@Validated BookForm form, BindingResult result, Model model) {
 	  if(result.hasErrors()) {
 	    return list(model);
 	  }
@@ -42,13 +42,12 @@ public class BookController {
 		return "books/edit";
 	}
 	@PostMapping(path = "edit")
-	String edit(@RequestParam Integer id, @Validated BookForm form,
-	                                                                                                                         BindingResult result) {
-	if(result.hasErrors()) {
-	return editForm(id, form);
-	}
-	bookService.update(form);
-	return "redirect:/books";
+	String edit(@RequestParam Integer id, @Validated BookForm form, BindingResult result) {
+		if(result.hasErrors()) {
+			return editForm(id, form);
+		}
+		bookService.update(form);
+		return "redirect:/books";
 	}
 
 	@PostMapping(path = "delete")

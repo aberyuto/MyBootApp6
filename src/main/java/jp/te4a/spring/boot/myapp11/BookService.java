@@ -8,6 +8,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class BookService {
 	@Autowired
@@ -40,7 +42,9 @@ public class BookService {
 	public BookForm findOne(Integer id) {
 		Optional<BookBean> bookBean = bookRepository.findById(id);
 		BookForm bookForm = new BookForm();
-		BeanUtils.copyProperties(bookBean, bookForm);
+		bookBean.ifPresent(book->{
+			BeanUtils.copyProperties(book, bookForm);
+		});
 		return bookForm;
 	}
 }
